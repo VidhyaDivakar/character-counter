@@ -1,75 +1,28 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+### How did you handle state updates when the text changed?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Used useState in the parent component to store the text value.
+Passed a callback (onTextChange) to the TextInput component.
+On every input change, the state gets updated immediately.
+This triggers re-render and updates all dependent components.
 
-## React Compiler
+What considerations did you make when calculating reading time?
+Used an average reading speed of 200 words per minute.
+Calculated reading time based on current word count.
+Handled empty input to avoid divide-by-zero or incorrect values.
+Rounded the output for better readability in UI.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### How did you ensure the UI remained responsive during rapid text input?
 
-Note: This will impact Vite dev & build performances.
 
-## Expanding the ESLint configuration
+Kept calculations lightweight and simple (no heavy processing).
+Used React re-render efficiently without unnecessary state duplication.
+Avoided storing derived data separately unless needed.
+Ensured updates happen synchronously with minimal delay.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### What challenges did you face when implementing the statistics calculations?
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Handling edge cases like empty input and extra spaces in text.
+Making sure word count logic doesn’t break with multiple spaces/newlines. Deciding between useMemo vs useState for derived data. Ensuring calculations update correctly without causing extra re-renders.

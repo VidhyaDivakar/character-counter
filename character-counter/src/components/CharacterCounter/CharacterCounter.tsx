@@ -23,7 +23,9 @@ export const CharacterCounter: React.FC<CharacterCounterProps> = ({
 
 const isBelowMin = minWords !== undefined && stats.wordCount < minWords;
  const isAboveMax = maxWords !== undefined && stats.wordCount > maxWords;
-
+ const progress = maxWords
+    ? Math.min((stats.wordCount / maxWords) * 100, 100)
+    : 0;
   return (
     <div className="mt-4 p-4 border rounded-lg bg-gray-50">
       <p className="text-sm">
@@ -51,6 +53,16 @@ const isBelowMin = minWords !== undefined && stats.wordCount < minWords;
           Maximum word limit exceeded ({maxWords})
         </p>
       )}
+       <div className="mt-3">
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div
+            className="bg-blue-500 h-2 rounded-full"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
+
+export default CharacterCounter;

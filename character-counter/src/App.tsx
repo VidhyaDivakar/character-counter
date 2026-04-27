@@ -6,7 +6,7 @@ function App() {
   const [text, setText] = useState('');
 
   return (
-    <div className="max-w-xl mx-auto mt-10">
+    <div className="max-w-xl mx-auto mt-6 px-4 sm:px-6 lg:px-8">
       <TextInput
         onTextChange={setText}
         placeholder="Type something..."
