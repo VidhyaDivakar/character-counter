@@ -1,7 +1,7 @@
 import React, {useMemo } from 'react';
 import type { CharacterCounterProps } from '../../types/index';
 
-export const CharacterCounter: React.FC<ChracterCounterProps> = ({
+export const CharacterCounter: React.FC<CharacterCounterProps> = ({
     text,
     minWords,
     maxWords,
@@ -10,16 +10,18 @@ export const CharacterCounter: React.FC<ChracterCounterProps> = ({
     const stats = useMemo(() => {
         const characterCount = text.length;
         const wordsArray = text.trim().split(/\s+/).filter(Boolean);
+        const wordCount = wordsArray.length;
+
         const readingTime = wordCount / 200;
         return {
             characterCount,
-            WordCount,
+            wordCount,
             readingTime
         };
-    }
+    
 }, [text]);
 
-const isBelowMin = minWords !== undefined && statusbar.wordCount < minWords;
+const isBelowMin = minWords !== undefined && stats.wordCount < minWords;
  const isAboveMax = maxWords !== undefined && stats.wordCount > maxWords;
 
   return (
