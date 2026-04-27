@@ -19,6 +19,7 @@ export interface StatsDisplayProps {
 
 // types/index.ts
 export interface CharacterCounterProps {
+    text: string;
   minWords?: number;
   maxWords?: number;
   targetReadingTime?: number; // in minutes
